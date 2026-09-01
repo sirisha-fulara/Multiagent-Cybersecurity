@@ -17,6 +17,7 @@ data/raw/*
 # Processed datasets
 data/processed/*
 !data/processed/.gitkeep
+!data/processed/cleaned_dataset.csv
 
 # Jupyter
 .ipynb_checkpoints/
