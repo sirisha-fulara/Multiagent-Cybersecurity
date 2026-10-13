@@ -1,0 +1,40 @@
+DDoS Attack
+
+A Distributed Denial of Service (DDoS) attack attempts to make a
+service or network resource unavailable by overwhelming it with
+large amounts of traffic or requests.
+
+Common indicators include unusually high traffic volume, many
+connections arriving in a short period of time, and a large number
+of requests targeting the same service.
+
+Possible mitigation techniques include traffic filtering,
+rate limiting, blocking malicious sources, using load balancing,
+and deploying DDoS protection services.
+
+
+Port Scan
+
+A port scan is a reconnaissance activity in which an attacker
+checks multiple network ports on a host to identify available
+services.
+
+Common indicators include repeated connection attempts to many
+different destination ports from the same source.
+
+Port scanning can be detected by monitoring connection attempts
+across multiple ports and identifying unusual scanning patterns.
+
+
+Brute Force Attack
+
+A brute force attack attempts to gain access to an account or
+service by repeatedly trying different passwords or credentials.
+
+Common indicators include repeated failed login attempts,
+multiple authentication requests in a short period, and
+login attempts from unusual sources.
+
+Possible mitigations include account lockout policies,
+multi-factor authentication, rate limiting, and monitoring
+authentication logs.
