@@ -15,14 +15,17 @@ from sklearn.metrics import (
 )
 
 # Load Dataset
-df = pd.read_csv("D:/MutiAgent Cybersecurity/data/processed/sampled_dataset.csv")
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+df = pd.read_csv(PROJECT_ROOT / "data" / "processed" / "sampled_dataset.csv")
 
 # Create Anomaly Label
 # BENIGN = 0
 # ATTACK = 1
 df["Anomaly"] = df["Label"].apply(lambda x: 0 if x == "BENIGN" else 1)
 
-X = df.drop(columns=["Label", "Anomaly"])
+X = df.drop(columns=["Label", "Target", "Anomaly"])
 y = df["Anomaly"]
 
 # Keep Numeric Features
@@ -65,7 +68,10 @@ print("\nConfusion Matrix:")
 print(confusion_matrix(y_test, rf_pred))
 
 # Save Model
-os.makedirs("../../results/anomaly", exist_ok=True)
-joblib.dump(rf_model, "../../results/anomaly/random_forest_anomaly.pkl")
-print("\nModel saved to:")
-print("../../results/anomaly/random_forest_anomaly.pkl")
+output_dir = PROJECT_ROOT / "results" / "anomaly"
+output_dir.mkdir(parents=True, exist_ok=True)
+
+model_path = output_dir / "random_forest_anomaly.pkl"
+joblib.dump(rf_model, model_path)
+
+print("Model saved to:", model_path)
