@@ -1,9 +1,11 @@
 import pandas as pd
 import numpy as np
 import joblib
-import os
+from pathlib import Path
 
-from sklearn.model_selection import train_test_split
+import xgboost as xgb
+
+from sklearn.impute import SimpleImputer
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -13,34 +15,62 @@ from sklearn.metrics import (
     confusion_matrix,
 )
 
-import xgboost as xgb
+# Project directory
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
-df = pd.read_csv("D:/MutiAgent Cybersecurity/data/processed/sampled_dataset.csv")
+# Load separate training and testing datasets
+train_path = PROJECT_ROOT / "data" / "processed" / "train_dataset.csv"
+test_path = PROJECT_ROOT / "data" / "processed" / "test_dataset.csv"
 
-# Create Anomaly Label
+train_df = pd.read_csv(train_path)
+test_df = pd.read_csv(test_path)
+
+# Create binary anomaly labels
 # BENIGN = 0
 # ATTACK = 1
-df["Anomaly"] = df["Label"].apply(lambda x: 0 if x == "BENIGN" else 1)
+y_train = (train_df["Label"] != "BENIGN").astype(int)
+y_test = (test_df["Label"] != "BENIGN").astype(int)
 
-X = df.drop(columns=["Label", "Anomaly"])
-y = df["Anomaly"]
+# Remove label columns from model inputs
+drop_columns = ["Label", "Target", "Anomaly"]
 
-X = X.select_dtypes(include=[np.number])
-
-X = X.replace([np.inf, -np.inf], np.nan)
-X = X.fillna(X.median())
-
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42, stratify=y
+X_train = train_df.drop(columns=drop_columns, errors="ignore").select_dtypes(
+    include=[np.number]
 )
 
+X_test = test_df.drop(columns=drop_columns, errors="ignore").select_dtypes(
+    include=[np.number]
+)
 
-# =========================
-# Calculate Class Weight
-# =========================
+# Keep exactly the same feature columns and order
+X_test = X_test.reindex(columns=X_train.columns)
 
-scale_pos_weight = (y_train == 0).sum() / (y_train == 1).sum()
+# Replace infinite values with missing values
+X_train = X_train.replace([np.inf, -np.inf], np.nan)
+X_test = X_test.replace([np.inf, -np.inf], np.nan)
 
+# Fit imputer on training data only
+imputer = SimpleImputer(strategy="median")
+
+X_train = pd.DataFrame(
+    imputer.fit_transform(X_train),
+    columns=X_train.columns,
+    index=X_train.index,
+)
+
+X_test = pd.DataFrame(
+    imputer.transform(X_test),
+    columns=X_train.columns,
+    index=X_test.index,
+)
+
+# Calculate class weight from training data
+negative_count = (y_train == 0).sum()
+positive_count = (y_train == 1).sum()
+
+scale_pos_weight = negative_count / positive_count
+
+# Initialize XGBoost
 xgb_model = xgb.XGBClassifier(
     n_estimators=100,
     max_depth=6,
@@ -51,9 +81,10 @@ xgb_model = xgb.XGBClassifier(
     eval_metric="logloss",
 )
 
+# Train model
 xgb_model.fit(X_train, y_train)
 
-# Prediction
+# Predict on the separate test dataset
 xgb_pred = xgb_model.predict(X_test)
 
 # Evaluation
@@ -61,23 +92,38 @@ print("\n" + "=" * 50)
 print("XGBOOST - ANOMALY DETECTION")
 print("=" * 50)
 
+print("Training rows:", len(X_train))
+print("Testing rows:", len(X_test))
+print("Features:", X_train.shape[1])
+
 print("Accuracy:", accuracy_score(y_test, xgb_pred))
 print("Precision:", precision_score(y_test, xgb_pred, zero_division=0))
 print("Recall:", recall_score(y_test, xgb_pred, zero_division=0))
-print("F1:", f1_score(y_test, xgb_pred, zero_division=0))
+print("F1-score:", f1_score(y_test, xgb_pred, zero_division=0))
 
 print("\nClassification Report:")
 print(
     classification_report(
-        y_test, xgb_pred, target_names=["Benign", "Anomaly"], zero_division=0
+        y_test,
+        xgb_pred,
+        labels=[0, 1],
+        target_names=["Benign", "Anomaly"],
+        zero_division=0,
     )
 )
 
 print("\nConfusion Matrix:")
-print(confusion_matrix(y_test, xgb_pred))
+print(confusion_matrix(y_test, xgb_pred, labels=[0, 1]))
 
-# Save Model
-os.makedirs("../../results/anomaly", exist_ok=True)
-joblib.dump(xgb_model, "../../results/anomaly/xgboost_anomaly.pkl")
-print("\nModel saved to:")
-print("../../results/anomaly/xgboost_anomaly.pkl")
+# Save model and fitted imputer
+output_dir = PROJECT_ROOT / "results" / "anomaly"
+output_dir.mkdir(parents=True, exist_ok=True)
+
+model_path = output_dir / "xgboost_anomaly.pkl"
+imputer_path = output_dir / "xgboost_anomaly_imputer.pkl"
+
+joblib.dump(xgb_model, model_path)
+joblib.dump(imputer, imputer_path)
+
+print("\nModel saved to:", model_path)
+print("Imputer saved to:", imputer_path)
