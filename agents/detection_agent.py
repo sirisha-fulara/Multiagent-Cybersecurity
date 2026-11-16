@@ -1,10 +1,7 @@
 from pathlib import Path
-
 import joblib
 import numpy as np
 import pandas as pd
-
-
 class DetectionAgent:
     """Detect benign or anomalous network traffic."""
 
@@ -31,7 +28,6 @@ class DetectionAgent:
         if not self.imputer_path.exists():
             raise FileNotFoundError(
                 f"Imputer not found: {self.imputer_path}. "
-                "Run models/anomaly/rf_anomaly.py first."
             )
 
         # Load trained artifacts
@@ -40,7 +36,6 @@ class DetectionAgent:
 
         # Get expected feature names
         self.feature_names = getattr(self.model, "feature_names_in_", None)
-
         if self.feature_names is None:
             raise ValueError("The saved model does not contain feature names.")
 
@@ -91,7 +86,6 @@ class DetectionAgent:
 
         # Convert invalid numeric values to missing values
         input_df = input_df.apply(pd.to_numeric, errors="coerce")
-
         input_df = input_df.replace([np.inf, -np.inf], np.nan)
 
         # Use the imputer fitted during training

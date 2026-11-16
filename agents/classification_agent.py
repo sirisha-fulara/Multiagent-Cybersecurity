@@ -8,7 +8,8 @@ import pandas as pd
 class ClassificationAgent:
     """Predict the attack category in network traffic."""
 
-    def __init__(self, model_path=None, imputer_path=None):
+    def __init__(self, model_path=None, imputer_path=None, confidence_threshold=0.6):
+        self.confidence_threshold = confidence_threshold
         # Find project root
         project_root = Path(__file__).resolve().parents[1]
 
@@ -110,21 +111,36 @@ class ClassificationAgent:
             index=input_df.index,
         )
 
-        # Predict attack categories
+        # Predict attack categories with confidence
         predictions = self.model.predict(input_df)
+
+        probabilities = (
+            self.model.predict_proba(input_df)
+            if hasattr(self.model, "predict_proba")
+            else None
+        )
+        classes = list(self.model.classes_)
 
         results = []
 
-        for prediction in predictions:
+        for i, prediction in enumerate(predictions):
             if isinstance(prediction, np.generic):
                 prediction = prediction.item()
 
-            results.append(
-                {
-                    "status": "classified",
-                    "prediction": prediction,
+            result = {"status": "classified", "prediction": prediction}
+
+            if probabilities is not None:
+                row = probabilities[i]
+                order = np.argsort(row)[::-1]
+                confidence = float(row[order[0]])
+                result["confidence"] = round(confidence, 4)
+                result["top_3"] = {
+                    str(classes[j]): round(float(row[j]), 4) for j in order[:3]
                 }
-            )
+                # Below this, the forest is guessing between several classes
+                result["low_confidence"] = confidence < self.confidence_threshold
+
+            results.append(result)
 
         return results
 

@@ -14,8 +14,14 @@ from sklearn.metrics import (
     confusion_matrix,
 )
 
-# Project directory
+import sys
+
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from models.evaluation_writer import save_model_evaluation
 
 # Load separate training and testing datasets
 train_path = PROJECT_ROOT / "data" / "processed" / "train_dataset.csv"
@@ -119,6 +125,16 @@ rf_model.fit(X_train, y_train)
 
 # Evaluate on held-out test data
 rf_pred = rf_model.predict(X_test)
+
+# Save actual attack classification evaluation metrics
+save_model_evaluation(
+    model_key="classification",
+    model_name="Random Forest - Attack Classification",
+    y_true=y_test,
+    y_pred=rf_pred,
+    labels=rf_model.classes_,
+    average="macro",
+)
 
 print("\n" + "=" * 50)
 print("RANDOM FOREST - ATTACK CLASSIFICATION")

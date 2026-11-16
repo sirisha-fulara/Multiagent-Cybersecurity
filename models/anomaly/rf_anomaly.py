@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import joblib
 from pathlib import Path
-
+import sys
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import (
@@ -16,7 +16,10 @@ from sklearn.metrics import (
 
 # Project directory
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
+from models.evaluation_writer import save_model_evaluation
 # Load separate training and testing datasets
 train_path = PROJECT_ROOT / "data" / "processed" / "train_dataset.csv"
 test_path = PROJECT_ROOT / "data" / "processed" / "test_dataset.csv"
@@ -73,6 +76,15 @@ rf_model.fit(X_train, y_train)
 
 # Evaluate on the separate, held-out test set
 rf_pred = rf_model.predict(X_test)
+
+# Save actual anomaly detection evaluation metrics
+save_model_evaluation(
+    model_key="anomaly",
+    model_name="Random Forest - Anomaly Detection",
+    y_true=y_test,
+    y_pred=rf_pred,
+    labels=[0, 1],
+)
 
 print("\n" + "=" * 50)
 print("RANDOM FOREST - ANOMALY DETECTION")

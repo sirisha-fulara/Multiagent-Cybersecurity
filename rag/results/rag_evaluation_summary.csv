@@ -1,0 +1,6 @@
+﻿metric,mean_score_0_to_1,cases_evaluated
+Faithfulness,0.7172,9
+Answer Relevancy,0.5119,9
+Context Precision,0.7778,9
+Context Recall,0.5556,9
+Answer Similarity,0.5242,9

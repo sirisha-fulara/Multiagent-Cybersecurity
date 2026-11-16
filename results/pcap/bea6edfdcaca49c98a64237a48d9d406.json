@@ -1,0 +1,1523 @@
+{
+    "status": "success",
+    "analysis_id": "bea6edfdcaca49c98a64237a48d9d406",
+    "filename": "synthetic_portscan.pcap",
+    "created_at": "2026-11-14T09:39:10.141750+00:00",
+    "pcap_summary": {
+        "total_flows": 1000,
+        "total_features": 84
+    },
+    "aggregate_detection": {
+        "pcap": "D:\\MutiAgent Cybersecurity new\\data\\uploads\\bea6edfdcaca49c98a64237a48d9d406.pcap",
+        "total_packets": 2003,
+        "tcp_packets": 2003,
+        "syn_ack_packets": 3,
+        "capture_duration_seconds": 1.499790906906128,
+        "syn_ack_packets_per_second": 2.0002788296594,
+        "unique_source_ips": 2,
+        "top_destination_ip": "192.168.10.50",
+        "top_destination_packet_count": 1003,
+        "top_destination_share_of_tcp": 0.5007488766849726,
+        "syn_ack_share_of_tcp": 0.0014977533699450823,
+        "top_tcp_source_ports": {
+            "50611": 2,
+            "45405": 2,
+            "42640": 2,
+            "44112": 2,
+            "55711": 2,
+            "43929": 2,
+            "46531": 2,
+            "41885": 2,
+            "41128": 2,
+            "42444": 2
+        },
+        "top_tcp_destination_ports": {
+            "50611": 2,
+            "22": 2,
+            "42640": 2,
+            "44112": 2,
+            "80": 2,
+            "43929": 2,
+            "46531": 2,
+            "41885": 2,
+            "41128": 2,
+            "42444": 2
+        },
+        "indicators": {
+            "high_synack_volume": false,
+            "high_synack_rate": false,
+            "high_source_diversity": false,
+            "concentrated_destination": false,
+            "synack_dominant": false
+        },
+        "indicators_triggered": 0,
+        "assessment": "No strong SYN-ACK reflection pattern detected",
+        "note": "Aggregate screening result, not proof of malicious intent. Correlate with network context and validate thresholds."
+    },
+    "flow_analysis": {
+        "summary": {
+            "total_flows": 1000,
+            "verdicts": {
+                "ATTACK (rule)": 1000
+            },
+            "attack_flows": 1000,
+            "insufficient_evidence_flows": 0,
+            "ml_attack_labels": {
+                "DoS": 2,
+                "Port Scan": 1
+            },
+            "ml_low_confidence_flows": 3
+        },
+        "rule_findings": [
+            {
+                "attack_type": "Port Scan",
+                "severity": "medium",
+                "confidence": 1.0,
+                "source": "10.0.0.99",
+                "target": "192.168.10.50",
+                "evidence": {
+                    "distinct_ports": 1000,
+                    "flows": 1000,
+                    "avg_packets_per_flow": 2.0,
+                    "ports_per_second": 667.0
+                },
+                "detector": "rule"
+            }
+        ],
+        "threat_intelligence": {
+            "Port Scan": {
+                "agent": "Threat Intelligence Agent",
+                "attack_type": "Port Scan",
+                "retrieved_context": [
+                    "Cybersecurity Threat Knowledge Base\nResearch-based reference for defensive threat analysis\nExpanded edition | 15 October 2026\nDocument type: Technical knowledge-base reference\nCitation style: Author–date citations with a reference list\nAbstract\nThis document consolidates research-based knowledge about common network and application attacks for use as a cybersecurity knowledge base. It summarizes attack objectives and mechanisms, observable behavior, investigation considerations, defensive controls, and limitations of network-only evidence. The material covers denial-of-service (DoS), distributed denial-of-service (DDoS), port scanning, botnets, brute-force authentication attacks, SQL injection, cross-site scripting (XSS), infiltration and lateral movement, and the Heartbleed vulnerability. The content is synthesized from published journal articles and peer-reviewed conference papers. It is intended to support evidence-aware threat explanation and defensive investigation; it is not a substitute for incident response procedures or direct examination of system evidence.\nKeywords\nCybersecurity; intrusion detection; denial of service; DDoS; port scanning; botnet; brute force; SQL injection; cross-site scripting; infiltration; Heartbleed; threat intelligence; defensive investigation.\n1. Introduction\nNetworked systems face threats that differ in their objectives, technical mechanisms, observable signals, and potential impact. Some attacks seek to disrupt availability, others seek to discover exposed services, compromise authentication, exploit web application weaknesses, or establish a foothold for further activity. Because these behaviors overlap with legitimate administration and unusual but benign workloads, detection should combine network observations with application, host, identity, and operational context.\nResearch surveys repeatedly identify a gap between detecting suspicious patterns and confirming an incident. A classifier may recognize traffic that resembles a known attack, but flow statistics alone may not establish the payload, the identity or intent of an operator, successful exploitation, data access, or business impact. For example, port scans may be performed by both attackers and defenders (Gates & Kvarnstad, 2011), and a flow-level anomaly does not by itself prove service disruption.\nThis knowledge base is organized by attack family. Each entry describes the concept, likely observable signals, investigation questions, defensive measures, and evidence limitations. References are included inline and in a bibliography so retrieved passages can retain traceable provenance.\n2. Denial of Service (DoS)\n2.1 Definition and objective\nA denial-of-service attack attempts to make a system, application, or network resource unavailable to legitimate users. It may exhaust bandwidth, connection capacity, CPU, memory, application workers, database resources, or another finite service dependency. The attack succeeds operationally when legitimate requests cannot be processed within acceptable limits, not merely when traffic volume rises. Research on denial-of-service defenses emphasizes that attack mechanisms and effective countermeasures vary according to the protocol layer and the resource under pressure (Mahjabin et al., 2017).\n2.2 Common mechanisms\nVolumetric activity consumes network capacity through large amounts of traffic. Protocol-state attacks exploit the cost of maintaining or processing protocol connections. Application-layer attacks send requests that consume disproportionate server-side resources. Slow-request techniques attempt to retain connection or request state for long periods by sending data slowly or incompletely. These families may produce different packet rates, connection durations, byte counts, and server-side symptoms, so one threshold is unlikely to identify all DoS behavior.\n2.3 Indicators to investigate\n- Traffic volume, packet rate, connection rate, connection duration, packet-size distribution, failed or incomplete sessions, and concentration on a destination service.\n- Application latency, error rates, connection-pool usage, worker saturation, CPU or memory pressure, and changes in legitimate request success rates.\n- Whether the increase is limited to one service or appears across a network segment, and whether it coincides with a release, promotion, outage, or legitimate workload spike.\n2.4 Defensive measures\n- Use capacity planning, load balancing, connection and request timeouts, reverse proxies, rate limits, and application-layer controls suited to the service.\n- Separate public-facing services from internal systems, reduce unnecessary exposure, and monitor the resources that can become bottlenecks.\n- Tune rate limits against baseline behavior and test their effect on legitimate clients, especially clients with slow links or long-lived sessions.\n2.5 Interpretation limits\nHigh traffic volume is not synonymous with DoS. A flash crowd, software deployment, monitoring scan, or malfunctioning client can create similar symptoms. A network alert should be corroborated with service-health measurements and server logs before reporting confirmed service disruption (Mahjabin et al., 2017).\n3. Distributed Denial of Service (DDoS)\n3.1 Definition and distinction from DoS\nA distributed denial-of-service attack attempts to impair availability using traffic or requests originating from multiple systems or locations. Distribution can increase the volume of traffic and make mitigation more difficult because blocking a single source may not be sufficient. DDoS attacks can target network capacity, protocol handling, or application resources. Survey literature groups DDoS methods by attack mechanism and discusses prevention, detection, mitigation, and the practical limitations of each approach (Mahjabin et al., 2017; Haseeb-Ur-Rehman et al., 2023).\n3.2 Attack behavior and impact\nPotential impacts include increased latency, packet loss, dropped connections, exhausted server resources, and reduced availability for legitimate users. The apparent number of source addresses is not, by itself, proof of a coordinated attack: NAT, proxies, cloud infrastructure, and legitimate distributed clients can complicate attribution. The incident assessment should focus first on the affected service, resource exhaustion, and observable impact.\n3.3 Indicators to investigate\n- A sharp deviation from the destination’s baseline in packet rate, byte rate, connection rate, or the number and distribution of sources.\n- Many flows converging on the same destination, service, or protocol, or a mix of traffic patterns that coincide with service degradation.\n- Upstream link saturation, load-balancer errors, server resource exhaustion, firewall drops, and changes in successful legitimate requests.\n3.4 Defensive measures\n- Use upstream DDoS protection or traffic scrubbing when the volume can overwhelm local capacity; coordinate with hosting, network, or service providers.\n- Apply filtering and rate limits where they match the observed attack layer. Protect critical application endpoints and use resilient architecture where feasible.\n- Monitor both security indicators and service-level objectives to evaluate whether mitigation restores availability without blocking legitimate traffic.\n3.5 Interpretation limits\nA flow classifier can identify traffic that resembles a DDoS pattern, but it cannot alone confirm the attacker's coordination, motive, or actual service impact. Confirm the event through traffic telemetry and service health, and report the level of confidence supported by the evidence (Haseeb-Ur-Rehman et al., 2023).\n4. Port Scanning and Reconnaissance\n4.1 Definition and objective\nPort scanning is the systematic probing of ports on one or more hosts to discover reachable services. It is commonly used during reconnaissance to identify potential attack surfaces, but it is also performed by administrators, inventory systems, vulnerability scanners, and security researchers. Research on scan detection highlights that distinguishing malicious scanning from legitimate scanning is a context-dependent problem (Gates & Kvarnstad, 2011).\n4.2 Observable behavior\nPotential indicators include one source contacting many destination ports, one source contacting many hosts, repeated short-lived connections, high proportions of failed connection attempts, or a pattern of sequential or clustered probes. The exact pattern depends on scan strategy, network filtering, and service responses. Some scans are slow or distributed to avoid simple rate thresholds; others are noisy and easy to distinguish from ordinary use.\n4.3 Investigation questions\n- Is the source an approved scanner, vulnerability-management service, monitoring system, administrator workstation, or unknown endpoint?\n- Are the probed hosts and ports exposed by design, and do firewall logs show accepted connections or only rejected attempts?\n- Did scanning precede authentication attempts, exploit attempts, unusual outbound connections, or endpoint alerts?\n- Does the activity violate the organization's authorization, asset-management, or acceptable-use policy?\n4.4 Defensive measures\n- Reduce unnecessary exposed services, restrict administrative ports, use segmentation, and review firewall rules.\n- Alert on scans that violate policy and maintain an inventory of approved scanners to reduce false positives.\n- Correlate scanning with subsequent activity rather than assuming that reconnaissance automatically led to compromise.\n4.5 Interpretation limits\nA port-scan alert does not prove exploitation, compromise, or malicious intent. Attribution and severity require source context, authorization records, firewall decisions, and any later activity (Gates & Kvarnstad, 2011).\n5. Bots and Botnets\n5.1 Definition\nA bot is a device or software instance that can be controlled to perform actions on behalf of an operator. A botnet is a collection of bots coordinated through command-and-control (C2) infrastructure or other coordination mechanisms. Botnets may be used for denial of service, spam, credential abuse, proxying, data theft, or other malicious activity. Network-based botnet detection research examines flow patterns, communication behavior, DNS, protocol features, and the challenges of evaluating detection methods in changing environments (García et al., 2014; Acarali et al., 2016).\n5.2 Observable behavior\nPotential clues include repeated outbound connections to unusual destinations, periodic or synchronized communication, unusual DNS behavior, unexpected protocol use, and similar network patterns across multiple endpoints. These are indicators, not universal botnet signatures. Legitimate software updaters, telemetry agents, cloud services, and scheduled jobs can also generate periodic connections.\n5.3 Investigation questions\n- Which endpoint generated the traffic, and which process or service initiated the connections?\n- Do DNS, proxy, firewall, and endpoint logs show repeated communication with the same destinations or a consistent communication pattern?\n- Are several hosts exhibiting correlated behavior, or is the alert limited to one host?\n- Is the destination known and expected for the installed software, and is there independent evidence of malware or unauthorized control?\n5.4 Defensive measures\n- Correlate network detection with endpoint telemetry, preserve relevant evidence, and follow an approved containment process if compromise is substantiated.\n- Investigate the initial compromise, patch the affected system, remove unauthorized persistence, and monitor for recurrence.\n- Use egress controls, DNS monitoring, least privilege, and endpoint protection to reduce the impact of unauthorized communication.\n5.5 Interpretation limits\nA single suspicious flow cannot establish that a device is a bot or that multiple devices form a botnet. Avoid attributing a malware family or C2 operator without corroborating indicators. Surveys emphasize that botnet behaviors and detection performance vary across botnet types and lifecycle phases (García et al., 2014; Acarali et al., 2016).\n6. Brute-Force Authentication Attacks\n6.1 Definition\nA brute-force authentication attack repeatedly attempts credentials against an account or service. Related behaviors include password spraying, where a small number of common passwords are tried against many accounts, and credential stuffing, where previously exposed credential pairs are reused. These behaviors differ in their attempt distribution and may require different monitoring rules. Research on authentication systems surveys attack methods and defenses, including stronger authentication and controls that reduce repeated guessing (Wang et al., 2021).\n6.2 Services and potential indicators\nFTP and SSH are common remote-access services; web applications may also expose login endpoints. Network indicators can include repeated connections to the same service, unusual attempt frequency, or many connections from a source. The strongest evidence of credential guessing usually comes from authentication logs, not flow statistics alone.\n6.3 Investigation questions\n- Are authentication failures repeated for one account, spread across many accounts, or followed by a successful login?\n- Do source address, device identity, time of day, geography, and user activity match expected behavior?\n- Was the activity generated by an approved test, a misconfigured application, a scheduled integration, or an unknown source?\n- Did the account perform privileged actions, create new credentials, or access unusual resources after authentication?\n6.4 Defensive measures\n- Require strong unique passwords and multi-factor authentication where available; use password screening and safe credential storage.\n- Apply rate limiting, progressive delays, risk-based challenges, and account protections designed to avoid allowing attackers to lock out legitimate users.\n- Restrict remote administration to approved networks, disable unused services, and alert on both repeated failures and suspicious successful logins.\n6.5 Interpretation limits\nA burst of network connections may indicate repeated attempts but cannot reveal the usernames or passwords submitted. Authentication records are needed to distinguish guessing from legitimate retries or network reconnection behavior (Wang et al., 2021).\n7. Web Application Attacks\n7.1 Overview\nWeb application attacks target application logic, user input handling, authentication, session management, or the interaction between an application and its backend. SQL injection, cross-site scripting, and web brute force have different mechanisms and evidence requirements. A generic web-attack label should therefore be treated as an initial category that requires more specific application-level investigation.\n7.2 SQL injection (SQLi)\nSQL injection occurs when untrusted input is incorporated into a database query in a way that changes the intended query structure. Depending on the application and database permissions, the consequences may include unauthorized data access, modification, authentication bypass, or errors that expose implementation details. Research surveys categorize SQL injection detection and prevention approaches and emphasize the importance of safer query construction and application-level controls (Elshazly et al., 2014; Aliero et al., 2020; Kashyap & Jana, 2025).\n- Investigate request parameters, application logs, database errors, query behavior, and evidence that user input reaches a query without safe parameterization.\n- Use parameterized queries or prepared statements, least-privilege database accounts, safe error handling, and secure development testing.\n- Validate the finding using authorized testing and application evidence rather than relying on an anomalous flow alone.\n7.3 Cross-site scripting (XSS)\nCross-site scripting occurs when attacker-controlled content is interpreted as executable script in a user's browser in a context where it should be treated as data. Research distinguishes reflected, stored, and DOM-based XSS and surveys detection and mitigation techniques. The underlying issue commonly involves unsafe handling or rendering of untrusted content; the appropriate defense depends on the context in which content is inserted (Rodríguez et al., 2020; Hannousse et al., 2024).\n- Investigate request and response records, affected pages, rendering context, output encoding, and whether untrusted input reaches a script-capable browser context.\n- Use context-appropriate output encoding, safe templating, avoid unsafe DOM operations, and apply a Content Security Policy as defense in depth.\n- Test changes against legitimate application behavior; a content policy alone is not a substitute for safe output handling.\n7.4 Web brute force\nWeb brute force repeatedly attempts authentication at a web login endpoint. Investigate failed and successful login events, targeted accounts, request frequency, and whether attempts are distributed across sources. Defensive measures include multi-factor authentication, rate limits, credential protections, and monitoring for suspicious success after repeated failure (Wang et al., 2021).\n7.5 Evidence limitations\nFlow records may be encrypted or aggregated and generally do not reveal the exact SQL expression, script payload, form field, or account that was targeted. Web server, application, identity, and database logs are needed to identify the specific attack mechanism and determine impact.\n8. Infiltration, Lateral Movement, and Post-Compromise Activity\n8.1 Definition\nInfiltration describes unauthorized entry into a system or network. After an initial foothold, an intruder may attempt to discover internal assets, reuse credentials, access remote services, move between hosts, or establish persistence. These phases can involve legitimate protocols and administrative tools, making isolated network observations difficult to interpret. The key defensive question is whether the activity is authorized and consistent with the host's role.\n8.2 Indicators to investigate\n- Unexpected internal-to-internal connections, unusual remote administration, new service access, or communication between systems that do not normally interact.\n- Authentication changes, newly used accounts, abnormal privilege use, endpoint alerts, process execution, persistence artifacts, or unexpected file changes.\n- Unusual outbound connections or data transfer following suspicious internal access.\n8.3 Investigation workflow\n- Identify the source and destination hosts, user identities, timestamps, and services involved; build a timeline across network and endpoint records.\n- Determine whether access was authorized and whether there is corroborating evidence of execution, privilege use, persistence, or data access.\n- Preserve relevant logs and evidence, establish the likely scope, and avoid disruptive containment actions until they are justified by the response process, except where urgent containment is warranted.\n8.4 Defensive measures\n- Apply network segmentation, least privilege, patch management, multi-factor authentication, and controlled administrative access.\n- Monitor remote-service use, privileged account activity, and unusual east-west traffic; investigate unexpected authentication chains.\n- Follow an incident-response process to validate, contain, eradicate, recover, and document confirmed incidents.\n8.5 Interpretation limits\nAn anomaly classifier cannot alone prove successful compromise or identify an initial access technique. Phrase findings as suspicious or infiltration-like until host, identity, or application evidence corroborates the conclusion.\n9. Heartbleed (CVE-2014-0160)\n9.1 Vulnerability overview\nHeartbleed was a vulnerability in the TLS heartbeat extension implementation in certain OpenSSL versions. It could allow a remote party to obtain portions of process memory from a vulnerable peer by exploiting insufficient bounds checking in heartbeat processing. Potentially exposed data depended on what was present in memory at the time and could include sensitive material. Durumeric et al. (2014) studied the scale of exposure, remediation, and observed exploitation following disclosure.\n9.2 Security significance\nHeartbleed is a software vulnerability, not a general traffic pattern. Network observations may show TLS communication, but they ordinarily cannot determine the precise OpenSSL version running on a host or prove that memory disclosure occurred. Identification depends on software inventory, version assessment, vulnerability records, and evidence of exposure.\n9.3 Investigation and remediation\n- Identify systems and services that used affected OpenSSL versions through authorized asset inventory and vulnerability management.\n- Apply vendor-supported fixes or upgrades and verify that the vulnerable implementation is no longer deployed.\n- Assess whether sensitive information could have been exposed. Based on the environment and evidence, response may include certificate replacement, key and credential rotation, and further incident investigation.\n- Review logs and exposure history where available, while recognizing that the absence of clear exploitation logs does not prove that no data was exposed.\n9.4 Interpretation limits\nA generic network-flow prediction labelled Heartbleed should trigger a vulnerability and exposure check, not a claim that a system is vulnerable or has been exploited. Confirm the installed software version and remediation state using trusted asset evidence (Durumeric et al., 2014).\n10. Cross-Cutting Defensive Investigation Principles\n10.1 Validate before concluding\nTreat automated detection as triage. Check the raw event, expected behavior, asset role, maintenance windows, and whether the source is authorized. The severity of an alert should depend on corroborating evidence and potential impact, not on a class label alone.\n10.2 Correlate independent evidence\nNetwork flow records are useful for behavior and communication patterns but may omit application payloads, process details, identity context, and service impact. Correlate them with firewall, DNS, endpoint, authentication, server, application, and vulnerability-management records as appropriate to the suspected attack.\n10.3 Preserve context and provenance\nRecord timestamps, source and destination identifiers, relevant features or log events, model prediction, available confidence score, retrieved research passages, and the limits of the evidence. Preserve source citations in generated reports so analysts can verify the explanation.\n10.4 Use proportionate controls\nMitigation should match the threat and be tested against legitimate workloads. Blocking, isolating, rate-limiting, patching, credential rotation, or service changes can have operational consequences. Use authorized incident-response procedures and document the rationale for disruptive actions.\n10.5 Communicate uncertainty\nUse language such as “the observed traffic is consistent with…”, “investigate whether…”, and “the available flow evidence does not establish…”. Avoid claiming attribution, successful compromise, data theft, or service impact unless independent evidence supports it.\n11. Recommended Knowledge-Base Entry Format\nFor consistent retrieval and report generation, each attack entry should use the following fields:\n- Attack name and synonyms.\n- Definition and security objective.\n- Mechanism and common variants.\n- Potential network indicators, with a note that they are not conclusive.\n- Additional evidence needed from host, identity, application, or service telemetry.\n- Defensive investigation questions.\n- Mitigation and prevention considerations.\n- False-positive sources and interpretation limitations.\n- Published references, DOI or stable publication URL, and section-level source metadata where available.\n12. Conclusion\nA useful cybersecurity knowledge base does more than define attacks. It connects each threat category to observable evidence, relevant investigation questions, proportionate defenses, and explicit limitations. DoS and DDoS require evidence of resource pressure and availability impact; port scanning requires authorization and follow-on context; botnet and infiltration hypotheses need endpoint and communication corroboration; brute-force alerts need authentication logs; web attacks require application evidence; and Heartbleed requires software-version and exposure verification. Research citations provide traceability, while careful uncertainty language prevents an automated prediction from being presented as a confirmed incident.\nReferences\n- Acarali, D., Rajarajan, M., Komninos, N., & Herwono, I. (2016). Survey of approaches and features for the identification of HTTP-based botnet traffic. Journal of Network and Computer Applications, 76, 1–15. https://doi.org/10.1016/j.jnca.2016.10.007\n- Aliero, M. S., Qureshi, K. N., Pasha, M. F., Ghani, I., & Yauri, R. A. (2020). Systematic review analysis on SQLIA detection and prevention approaches. Wireless Personal Communications, 112, 2297–2333. https://doi.org/10.1007/s11277-020-07151-2\n- Durumeric, Z., Kasten, J., Adrian, D., Halderman, J. A., Bailey, M., Li, F., Weaver, N., Amann, J., Beekman, J., Payer, M., & Paxson, V. (2014). The matter of Heartbleed. Proceedings of the 2014 ACM Internet Measurement Conference, 475–488. https://doi.org/10.1145/2663716.2663755\n- Elshazly, K., Fouad, Y., Saleh, M., & Sewisy, A. (2014). A survey of SQL injection attack detection and prevention. Journal of Computer and Communications, 2(8). https://doi.org/10.4236/jcc.2014.28001\n- García, S., Zunino, A., & Campo, M. (2014). Survey on network-based botnet detection methods. Security and Communication Networks, 7, 878–903. https://doi.org/10.1002/sec.800\n- Gates, C., & Kvarnstad, B. (2011). Surveying port scans and their detection methodologies. The Computer Journal, 54(10), 1565–1578. https://doi.org/10.1093/comjnl/bxr035\n- Hannousse, A., Yahiouche, S., & Nait-Hamoud, M. C. (2024). Twenty-two years since revealing cross-site scripting attacks: A systematic mapping and a comprehensive survey. Computer Science Review, 52, 100634. https://doi.org/10.1016/j.cosrev.2024.100634\n- Haseeb-Ur-Rehman, R. M., Aman, A. H. M., Hasan, M. K., Ariffin, K. A. Z., Namoun, A., Tufail, A., & Kim, K.-H. (2023). High-speed network DDoS attack detection: A survey. Sensors, 23(15), 6850. https://doi.org/10.3390/s23156850\n- Kashyap, A., & Jana, A. (2025). A survey on detection and prevention techniques of SQL injection attacks. International Journal of Information and Computer Security, 26(4), 332–371. https://doi.org/10.1504/IJICS.2025.146528\n- Mahjabin, T., Xiao, Y., Sun, G., & Jiang, W. (2017). A survey of distributed denial-of-service attack, prevention, and mitigation techniques. International Journal of Distributed Sensor Networks. https://doi.org/10.1177/1550147717741463\n- Rodríguez, G. E., Torres, J. G., Flores, P., & Benavides, D. E. (2020). Cross-site scripting (XSS) attacks and mitigation: A survey. Computer Networks, 166, 106960. https://doi.org/10.1016/j.comnet.2019.106960\n- Wang, X., Yan, Z., Zhang, R., & Zhang, P. (2021). Attacks and defenses in user authentication systems: A survey. Journal of Network and Computer Applications, 188, 103080. https://doi.org/10.1016/j.jnca.2021.103080\nSource and citation note\nThis document is an original synthesis of published scholarly articles and conference proceedings. It does not reproduce full papers. Bibliographic details and publication metadata should be checked against the publisher record before formal academic submission. For research writing, cite the original works directly rather than citing this knowledge-base document as the authority."
+                ],
+                "analysis": "Attack Family: Denial of service (DoS) / Distributed denial of service (DDoS); Port scanning\n\nObserved Behavior:\n\nCommon Mechanisms: Volumetric activity consumes bandwidth based on traffic volumes, packets per second, bytes per second, or total throughput. Protocol-State attacks utilize the cost of establishing or managing connections. Application Layer attacks probe requested URLs, processes, or files. Slow Request Techniques wait for extended times to complete tasks. This family includes brute-force attacks attempting to gain unauthenticated access to shared resources.\n\nDefensive Measures:\n\nApplication Latency, Error Rates, Connection Pool Usage, Worker Satisfaction, CPU or Memory Pressure, Changes",
+                "status": "completed",
+                "evidence_available": true
+            }
+        },
+        "flow_reports": [
+            {
+                "flow_index": 0,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 1,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 50611,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 1
+                }
+            },
+            {
+                "flow_index": 1,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 2,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 52937,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 2
+                }
+            },
+            {
+                "flow_index": 2,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 3,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 42373,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 3
+                }
+            },
+            {
+                "flow_index": 3,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 4,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59096,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 4
+                }
+            },
+            {
+                "flow_index": 4,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 5,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 41228,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 5
+                }
+            },
+            {
+                "flow_index": 5,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 6,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 53702,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 6
+                }
+            },
+            {
+                "flow_index": 6,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 7,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 42972,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 7
+                }
+            },
+            {
+                "flow_index": 7,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 8,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 41936,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 8
+                }
+            },
+            {
+                "flow_index": 8,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 9,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 58910,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 9
+                }
+            },
+            {
+                "flow_index": 9,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 10,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 41624,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 10
+                }
+            },
+            {
+                "flow_index": 10,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 11,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 41526,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 11
+                }
+            },
+            {
+                "flow_index": 11,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 12,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 53734,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 12
+                }
+            },
+            {
+                "flow_index": 12,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 13,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59057,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 13
+                }
+            },
+            {
+                "flow_index": 13,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 14,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 43192,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 14
+                }
+            },
+            {
+                "flow_index": 14,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 15,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 57423,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 15
+                }
+            },
+            {
+                "flow_index": 15,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 16,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59187,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 16
+                }
+            },
+            {
+                "flow_index": 16,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 17,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 51848,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 17
+                }
+            },
+            {
+                "flow_index": 17,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 18,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 45890,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 18
+                }
+            },
+            {
+                "flow_index": 18,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 19,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 58822,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 19
+                }
+            },
+            {
+                "flow_index": 19,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 20,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59954,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 20
+                }
+            },
+            {
+                "flow_index": 20,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 21,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 43868,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 21
+                }
+            },
+            {
+                "flow_index": 21,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.76,
+                "classification": {
+                    "status": "classified",
+                    "prediction": "DoS",
+                    "confidence": 0.52,
+                    "top_3": {
+                        "DoS": 0.52,
+                        "Port Scan": 0.46,
+                        "DDoS": 0.02
+                    },
+                    "low_confidence": true
+                },
+                "flow_metadata": {
+                    "Flow ID": 22,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 45405,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 22
+                }
+            },
+            {
+                "flow_index": 22,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 23,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44980,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 23
+                }
+            },
+            {
+                "flow_index": 23,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 24,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 53818,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 24
+                }
+            },
+            {
+                "flow_index": 24,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 25,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 58287,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 25
+                }
+            },
+            {
+                "flow_index": 25,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 26,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 51474,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 26
+                }
+            },
+            {
+                "flow_index": 26,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 27,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59002,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 27
+                }
+            },
+            {
+                "flow_index": 27,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 28,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 42253,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 28
+                }
+            },
+            {
+                "flow_index": 28,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 29,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 48845,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 29
+                }
+            },
+            {
+                "flow_index": 29,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 30,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 41988,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 30
+                }
+            },
+            {
+                "flow_index": 30,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 31,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 52641,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 31
+                }
+            },
+            {
+                "flow_index": 31,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 32,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 55128,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 32
+                }
+            },
+            {
+                "flow_index": 32,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 33,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 43836,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 33
+                }
+            },
+            {
+                "flow_index": 33,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 34,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 47150,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 34
+                }
+            },
+            {
+                "flow_index": 34,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 35,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44238,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 35
+                }
+            },
+            {
+                "flow_index": 35,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 36,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 53038,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 36
+                }
+            },
+            {
+                "flow_index": 36,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 37,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 42640,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 37
+                }
+            },
+            {
+                "flow_index": 37,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 38,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 53161,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 38
+                }
+            },
+            {
+                "flow_index": 38,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 39,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44486,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 39
+                }
+            },
+            {
+                "flow_index": 39,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 40,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 58029,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 40
+                }
+            },
+            {
+                "flow_index": 40,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 41,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 47561,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 41
+                }
+            },
+            {
+                "flow_index": 41,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 42,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 45774,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 42
+                }
+            },
+            {
+                "flow_index": 42,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 43,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 47645,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 43
+                }
+            },
+            {
+                "flow_index": 43,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 44,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59304,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 44
+                }
+            },
+            {
+                "flow_index": 44,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 45,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 49238,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 45
+                }
+            },
+            {
+                "flow_index": 45,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 46,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 53728,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 46
+                }
+            },
+            {
+                "flow_index": 46,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 47,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59982,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 47
+                }
+            },
+            {
+                "flow_index": 47,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 48,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44112,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 48
+                }
+            },
+            {
+                "flow_index": 48,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 49,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 58326,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 49
+                }
+            },
+            {
+                "flow_index": 49,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 50,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 53073,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 50
+                }
+            },
+            {
+                "flow_index": 50,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 51,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 55778,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 51
+                }
+            },
+            {
+                "flow_index": 51,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 52,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 42039,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 52
+                }
+            },
+            {
+                "flow_index": 52,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 53,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 46840,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 53,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 54,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 43602,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 54
+                }
+            },
+            {
+                "flow_index": 54,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 55,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 40007,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 55
+                }
+            },
+            {
+                "flow_index": 55,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 56,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 57583,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 56
+                }
+            },
+            {
+                "flow_index": 56,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 57,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 46814,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 57
+                }
+            },
+            {
+                "flow_index": 57,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 58,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44867,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 58
+                }
+            },
+            {
+                "flow_index": 58,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 59,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 51383,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 59
+                }
+            },
+            {
+                "flow_index": 59,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 60,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 55536,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 60
+                }
+            },
+            {
+                "flow_index": 60,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 61,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 55993,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 61
+                }
+            },
+            {
+                "flow_index": 61,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 62,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 55854,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 62
+                }
+            },
+            {
+                "flow_index": 62,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 63,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44722,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 63
+                }
+            },
+            {
+                "flow_index": 63,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 64,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 45290,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 64
+                }
+            },
+            {
+                "flow_index": 64,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 65,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 46724,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 65
+                }
+            },
+            {
+                "flow_index": 65,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 66,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44803,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 66
+                }
+            },
+            {
+                "flow_index": 66,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 67,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 57305,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 67
+                }
+            },
+            {
+                "flow_index": 67,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 68,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 56986,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 68
+                }
+            },
+            {
+                "flow_index": 68,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 69,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 47300,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 69
+                }
+            },
+            {
+                "flow_index": 69,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 70,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 47844,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 70
+                }
+            },
+            {
+                "flow_index": 70,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 71,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 47429,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 71
+                }
+            },
+            {
+                "flow_index": 71,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 72,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 40949,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 72
+                }
+            },
+            {
+                "flow_index": 72,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 73,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 49155,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 73
+                }
+            },
+            {
+                "flow_index": 73,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 74,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 46345,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 74
+                }
+            },
+            {
+                "flow_index": 74,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 75,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 54654,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 75
+                }
+            },
+            {
+                "flow_index": 75,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 76,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 42639,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 76
+                }
+            },
+            {
+                "flow_index": 76,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 77,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 47433,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 77
+                }
+            },
+            {
+                "flow_index": 77,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 78,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 51066,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 78
+                }
+            },
+            {
+                "flow_index": 78,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 79,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59997,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 79
+                }
+            },
+            {
+                "flow_index": 79,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.76,
+                "classification": {
+                    "status": "classified",
+                    "prediction": "DoS",
+                    "confidence": 0.56,
+                    "top_3": {
+                        "DoS": 0.56,
+                        "Port Scan": 0.41,
+                        "DDoS": 0.03
+                    },
+                    "low_confidence": true
+                },
+                "flow_metadata": {
+                    "Flow ID": 80,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 55711,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 80,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 81,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 43929,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 81
+                }
+            },
+            {
+                "flow_index": 81,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 82,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 46531,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 82
+                }
+            },
+            {
+                "flow_index": 82,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 83,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 50895,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 83
+                }
+            },
+            {
+                "flow_index": 83,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 84,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 55176,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 84
+                }
+            },
+            {
+                "flow_index": 84,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 85,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 45205,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 85
+                }
+            },
+            {
+                "flow_index": 85,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 86,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44952,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 86
+                }
+            },
+            {
+                "flow_index": 86,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 87,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59525,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 87
+                }
+            },
+            {
+                "flow_index": 87,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 88,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 51482,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 88
+                }
+            },
+            {
+                "flow_index": 88,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 89,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 40701,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 89
+                }
+            },
+            {
+                "flow_index": 89,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 90,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 57255,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 90
+                }
+            },
+            {
+                "flow_index": 90,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 91,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 46383,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 91
+                }
+            },
+            {
+                "flow_index": 91,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 92,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 48252,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 92
+                }
+            },
+            {
+                "flow_index": 92,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 93,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 56422,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 93
+                }
+            },
+            {
+                "flow_index": 93,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 94,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 48498,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 94
+                }
+            },
+            {
+                "flow_index": 94,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 95,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 44295,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 95
+                }
+            },
+            {
+                "flow_index": 95,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 96,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 55013,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 96
+                }
+            },
+            {
+                "flow_index": 96,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 97,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 56438,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 97
+                }
+            },
+            {
+                "flow_index": 97,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 98,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 54422,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 98
+                }
+            },
+            {
+                "flow_index": 98,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 99,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 59941,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 99
+                }
+            },
+            {
+                "flow_index": 99,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Port Scan",
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "flow_metadata": {
+                    "Flow ID": 100,
+                    "Source IP": "10.0.0.99",
+                    "Source Port": 45647,
+                    "Destination IP": "192.168.10.50",
+                    "Destination Port": 100
+                }
+            }
+        ],
+        "flow_reports_truncated": true
+    }
+}

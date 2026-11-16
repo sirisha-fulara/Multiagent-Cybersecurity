@@ -1,4 +1,13 @@
 pandas
 numpy
+scikit-learn==1.9.0
+joblib
+xgboost
+transformers
+torch
 sentence-transformers
 faiss-cpu
+flask
+flask-cors
+scapy
+python-dotenv

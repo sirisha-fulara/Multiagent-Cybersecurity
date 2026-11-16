@@ -1,0 +1,107 @@
+{
+  "_readme": "Paste your real evaluation results here. Leave a value as null if you don't have it - the Model Insights page shows 'Not provided' instead of inventing a number. Metrics are fractions between 0 and 1.",
+  "models": {
+    "anomaly": {
+      "accuracy": 0.9988706945228685,
+      "precision": 1.0,
+      "recall": 0.9977411339507567,
+      "f1": 0.998869289914066,
+      "confusionMatrix": {
+        "labels": [
+          "0",
+          "1"
+        ],
+        "matrix": [
+          [
+            4428,
+            0
+          ],
+          [
+            10,
+            4417
+          ]
+        ]
+      },
+      "model": "Random Forest - Anomaly Detection",
+      "evaluatedAt": "2026-11-15T11:14:54.602461+00:00",
+      "testSamples": 8855
+    },
+    "classification": {
+      "accuracy": 0.999322340185227,
+      "precision": 0.9813870527751547,
+      "recall": 0.9899289844142786,
+      "f1": 0.9855334038789804,
+      "confusionMatrix": {
+        "labels": [
+          "Botnet",
+          "DDoS",
+          "DoS",
+          "HeartBleed",
+          "Infiltration",
+          "Port Scan"
+        ],
+        "matrix": [
+          [
+            16,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            1246,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1764,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1396
+          ]
+        ]
+      },
+      "model": "Random Forest - Attack Classification",
+      "evaluatedAt": "2026-11-15T11:15:25.816735+00:00",
+      "testSamples": 4427
+    }
+  },
+  "rag": {
+    "evaluatedCases": null,
+    "faithfulness": null,
+    "answerRelevancy": null,
+    "contextPrecision": null,
+    "contextRecall": null,
+    "answerSimilarity": null
+  }
+}

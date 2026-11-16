@@ -1,0 +1,4016 @@
+{
+    "status": "success",
+    "analysis_id": "09e7f17af1664b36bb983207e53e2cc9",
+    "filename": "sample2.pcap",
+    "created_at": "2026-11-15T10:57:55.949097+00:00",
+    "analysis_type": "pcap",
+    "pcap_summary": {
+        "total_flows": 260,
+        "total_features": 84
+    },
+    "aggregate_detection": {
+        "pcap": "D:\\MutiAgent Cybersecurity new\\data\\uploads\\09e7f17af1664b36bb983207e53e2cc9.pcap",
+        "total_packets": 1592,
+        "tcp_packets": 1276,
+        "syn_ack_packets": 102,
+        "capture_duration_seconds": 718.4352660179138,
+        "syn_ack_packets_per_second": 0.14197521311190295,
+        "unique_source_ips": 8,
+        "top_destination_ip": "10.42.10.21",
+        "top_destination_packet_count": 402,
+        "top_destination_share_of_tcp": 0.31504702194357365,
+        "syn_ack_share_of_tcp": 0.07993730407523511,
+        "top_tcp_source_ports": {
+            "80": 221,
+            "443": 210,
+            "445": 145,
+            "52398": 12,
+            "60879": 12,
+            "65264": 12,
+            "65225": 12,
+            "53221": 12,
+            "62202": 11,
+            "60245": 11
+        },
+        "top_tcp_destination_ports": {
+            "80": 334,
+            "443": 196,
+            "445": 170,
+            "62202": 10,
+            "60316": 10,
+            "60245": 10,
+            "56607": 10,
+            "60350": 10,
+            "65264": 10,
+            "52398": 10
+        },
+        "indicators": {
+            "high_synack_volume": false,
+            "high_synack_rate": false,
+            "high_source_diversity": false,
+            "concentrated_destination": false,
+            "synack_dominant": false
+        },
+        "indicators_triggered": 0,
+        "assessment": "No strong SYN-ACK reflection pattern detected",
+        "note": "Aggregate screening result, not proof of malicious intent. Correlate with network context and validate thresholds."
+    },
+    "flow_analysis": {
+        "summary": {
+            "total_flows": 260,
+            "verdicts": {
+                "BENIGN": 227,
+                "ATTACK (rule)": 33
+            },
+            "attack_flows": 33,
+            "insufficient_evidence_flows": 0,
+            "ml_attack_labels": {},
+            "ml_low_confidence_flows": 0
+        },
+        "rule_findings": [
+            {
+                "attack_type": "Botnet (suspected beaconing)",
+                "severity": "medium",
+                "confidence": 0.711,
+                "source": "10.42.10.21",
+                "target": "10.42.20.40:80",
+                "evidence": {
+                    "connections": 17,
+                    "mean_interval_s": 42.15,
+                    "interval_cv": 0.189
+                },
+                "detector": "rule"
+            },
+            {
+                "attack_type": "Botnet (suspected beaconing)",
+                "severity": "medium",
+                "confidence": 0.864,
+                "source": "10.42.10.22",
+                "target": "10.42.20.40:80",
+                "evidence": {
+                    "connections": 16,
+                    "mean_interval_s": 45.04,
+                    "interval_cv": 0.036
+                },
+                "detector": "rule"
+            }
+        ],
+        "threat_intelligence": {
+            "Botnet (suspected beaconing)": {
+                "agent": "Threat Intelligence Agent",
+                "attack_type": "Botnet (suspected beaconing)",
+                "retrieved_context": [
+                    "5.1 Definition\nA bot is a device or software instance that can be controlled to perform actions on behalf of an operator. A botnet is a collection of bots coordinated through command-and-control (C2) infrastructure or other coordination mechanisms. Botnets may be used for denial of service, spam, credential abuse, proxying, data theft, or other malicious activity. Network-based botnet detection research examines flow patterns, communication behavior, DNS, protocol features, and the challenges of evaluating detection methods in changing environments (García et al., 2014; Acarali et al., 2016).",
+                    "5. Bots and Botnets",
+                    "5.5 Interpretation limits\nA single suspicious flow cannot establish that a device is a bot or that multiple devices form a botnet. Avoid attributing a malware family or C2 operator without corroborating indicators. Surveys emphasize that botnet behaviors and detection performance vary across botnet types and lifecycle phases (García et al., 2014; Acarali et al., 2016)."
+                ],
+                "analysis": "5.5 Interpretations limit\n\n       Report title:\n       \"Defensive Recommendations\"\n\n       Summary:\n       The following measures should be implemented to mitigate potential threats from botnets:\n\n       - Implement intrusion prevention systems with signature-based signatures against known malware families.\n       - Monitor network traffic using advanced techniques such as correlation analysis and anomaly detection tools.\n       - Conduct regular vulnerability assessments to identify vulnerabilities before exploitation by attackers.\n       - Develop incident response plans based on knowledge gained during investigations into previous attacks.\n       - Educate employees about phishing tactics employed by attackers.\n\n       Threats identified include:\n       Botnet (defendable), Domain name system (dns) spoofing (defendible), Denial of Service (DoS) (defendably), Man-in-the-middle (mitigating), Malware propagation (defendability), Penetration testing (defending), Vulnerabilities discovered (defendables), Virus/malware distribution (defendabile), Social engineering (defendablity), Traffic monitoring (defendabilty), Unauthorized access (defendabe",
+                "status": "completed",
+                "evidence_available": true
+            }
+        },
+        "flow_reports": [
+            {
+                "flow_index": 0,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 1,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53213,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 1,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 2,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 57794,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 2,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 3,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64113,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 3,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 4,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 52146,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 4,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.01,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 5,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59620,
+                    "Destination IP": "10.42.20.123",
+                    "Destination Port": 123
+                }
+            },
+            {
+                "flow_index": 5,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.01,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 6,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58307,
+                    "Destination IP": "10.42.20.123",
+                    "Destination Port": 123
+                }
+            },
+            {
+                "flow_index": 6,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 7,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 55527,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 7,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 8,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 55686,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 8,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 9,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54936,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 9,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 10,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 50688,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 10,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 11,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 51481,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 11,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 12,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54971,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 12,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 13,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62105,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 13,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 14,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 52147,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 14,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 15,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 49926,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 15,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 16,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 50352,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 16,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 17,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56448,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 17,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 18,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 49767,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 18,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 19,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64067,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 19,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.13,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 20,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62202,
+                    "Destination IP": "10.42.20.20",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 20,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.08,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 21,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60245,
+                    "Destination IP": "10.42.20.30",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 21,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.14,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 22,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60316,
+                    "Destination IP": "10.42.20.10",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 22,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.13,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 23,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56607,
+                    "Destination IP": "10.42.20.15",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 23,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.13,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 24,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60350,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 24,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 25,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 63554,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 25,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 26,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 53860,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 26,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 27,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52633,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 27,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 28,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 53385,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 28,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 29,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59093,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 29,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 30,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 57600,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 30,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 31,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63837,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 31,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 32,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59164,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 32,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 33,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 55290,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 33,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 34,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 64443,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 34,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 35,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 52662,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 35,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 36,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61526,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 36,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 37,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 52407,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 37,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 38,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 65463,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 38,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 39,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 55618,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 39,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 40,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59060,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 40,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 41,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56131,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 41,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 42,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 64854,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 42,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 43,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52909,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 43,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 44,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 56237,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 44,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 45,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 58066,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 45,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 46,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64896,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 46,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 47,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62388,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 47,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 48,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 56787,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 48,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 49,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 52375,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 49,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 50,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 56084,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 50,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 51,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53459,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 51,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 52,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 61394,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 52,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 53,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62160,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 53,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 54,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59929,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 54,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 55,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 57001,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 55,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 56,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64134,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 56,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 57,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 60329,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 57,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.02,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 58,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 57229,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 58,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 59,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 51086,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 59,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 60,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 63975,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 60,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 61,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 65488,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 61,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 62,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63279,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 62,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 63,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58346,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 63,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 64,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59951,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 64,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 65,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 54414,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 65,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 66,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 65091,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 66,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 67,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 51684,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 67,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 68,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64578,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 68,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 69,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61661,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 69,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 70,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 56346,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 70,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 71,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52505,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 71,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 72,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 61531,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 72,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 73,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 60728,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 73,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 74,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 56235,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 74,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 75,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 57472,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 75,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 76,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53114,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 76,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.46,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 77,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62267,
+                    "Destination IP": "10.42.20.20",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 77,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.46,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 78,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61407,
+                    "Destination IP": "10.42.20.30",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 78,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.46,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 79,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52350,
+                    "Destination IP": "10.42.20.10",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 79,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.46,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 80,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61205,
+                    "Destination IP": "10.42.20.15",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 80,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.46,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 81,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 50268,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 81,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 82,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56551,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 82,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 83,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 61329,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 83,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 84,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64635,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 84,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 85,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62887,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 85,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 86,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 50014,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 86,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 87,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56710,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 87,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 88,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54237,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 88,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 89,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61370,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 89,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 90,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 54719,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 90,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 91,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 53436,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 91,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 92,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 52038,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 92,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.01,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 93,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60644,
+                    "Destination IP": "10.42.20.123",
+                    "Destination Port": 123
+                }
+            },
+            {
+                "flow_index": 93,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 94,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54843,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 94,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 95,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53041,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 95,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 96,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62074,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 96,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.05,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 97,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 63064,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 97,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.01,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 98,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 57845,
+                    "Destination IP": "10.42.20.123",
+                    "Destination Port": 123
+                }
+            },
+            {
+                "flow_index": 98,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 99,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 53602,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 99,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 100,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 61341,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 100,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 101,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58467,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 101,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 102,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 50596,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 102,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 103,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59228,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 103,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 104,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 65057,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 104,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 105,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53781,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 105,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 106,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 49191,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 106,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 107,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61310,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 107,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 108,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54726,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 108,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 109,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 50568,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 109,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 110,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53983,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 110,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 111,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63083,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 111,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 112,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 56323,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 112,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 113,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 61610,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 113,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 114,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 60930,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 114,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 115,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 55640,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 115,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 116,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 49221,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 116,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 117,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62001,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 117,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 118,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53946,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 118,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 119,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56840,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 119,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 120,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 64332,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 120,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 121,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 57211,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 121,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 122,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 54607,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 122,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 123,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62510,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 123,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 124,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 53209,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 124,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 125,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62244,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 125,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 126,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54945,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 126,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 127,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58953,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 127,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 128,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63040,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 128,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 129,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56605,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 129,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 130,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 51498,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 130,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 131,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58992,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 131,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 132,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 63905,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 132,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 133,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58719,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 133,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 134,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 49416,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 134,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 135,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52971,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 135,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 136,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 60380,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 136,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 137,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 49662,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 137,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 138,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61931,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 138,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 139,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54220,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 139,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 140,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 54933,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 140,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 141,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62462,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 141,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 142,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58570,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 142,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 143,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60458,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 143,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 144,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 55493,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 144,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 145,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 55135,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 145,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.14,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 146,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52398,
+                    "Destination IP": "10.42.20.20",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 146,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 147,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60879,
+                    "Destination IP": "10.42.20.30",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 147,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.09,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 148,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 65264,
+                    "Destination IP": "10.42.20.10",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 148,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.08,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 149,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 65225,
+                    "Destination IP": "10.42.20.15",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 149,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.13,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 150,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53221,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 150,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 151,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64453,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 151,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 152,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 56792,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 152,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 153,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 63212,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 153,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 154,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 65291,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 154,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 155,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 63180,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 155,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 156,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53455,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 156,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 157,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61167,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 157,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 158,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63153,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 158,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 159,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 65192,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 159,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 160,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61358,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 160,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 161,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 55098,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 161,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 162,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58363,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 162,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 163,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 53953,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 163,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 164,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 57801,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 164,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 165,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63396,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 165,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 166,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 57840,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 166,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 167,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54606,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 167,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 168,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 55194,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 168,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 169,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54465,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 169,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 170,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 57757,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 170,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 171,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60379,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 171,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 172,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 49859,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 172,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.01,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 173,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 49346,
+                    "Destination IP": "10.42.20.123",
+                    "Destination Port": 123
+                }
+            },
+            {
+                "flow_index": 173,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 174,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 53657,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 174,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 175,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 54094,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 175,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 176,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58624,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 176,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 177,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 60655,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 177,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.01,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 178,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59576,
+                    "Destination IP": "10.42.20.123",
+                    "Destination Port": 123
+                }
+            },
+            {
+                "flow_index": 178,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 179,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60177,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 179,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 180,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 49320,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 180,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 181,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 65246,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 181,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 182,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 49419,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 182,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 183,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 57703,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 183,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 184,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53567,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 184,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 185,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52284,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 185,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.12,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 186,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59082,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 186,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 187,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 57862,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 187,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 188,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56693,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 188,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.05,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 189,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 50797,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 189,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 190,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 55389,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 190,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 191,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 61796,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 191,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 192,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62700,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 192,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 193,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52450,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 193,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 194,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 55995,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 194,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 195,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 57315,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 195,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 196,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 51255,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 196,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 197,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60532,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 197,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 198,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63226,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 198,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.07,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 199,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 50174,
+                    "Destination IP": "10.42.20.20",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 199,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.14,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 200,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59231,
+                    "Destination IP": "10.42.20.30",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 200,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.14,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 201,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64476,
+                    "Destination IP": "10.42.20.10",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 201,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.07,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 202,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59029,
+                    "Destination IP": "10.42.20.15",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 202,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.07,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 203,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59194,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 445
+                }
+            },
+            {
+                "flow_index": 203,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 204,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 63702,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 204,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 205,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62459,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 205,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 206,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62678,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 206,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 207,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 52709,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 207,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 208,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 55085,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 208,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 209,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 50231,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 209,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 210,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 60212,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 210,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 211,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63122,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 211,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 212,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 61236,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 212,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 213,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60888,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 213,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 214,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 54061,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 214,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 215,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 55635,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 215,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 216,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 50865,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 216,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 217,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 60242,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 217,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 218,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52550,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 218,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 219,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 59218,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 219,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 220,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59177,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 220,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 221,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 63399,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 221,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 222,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 54611,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 222,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 223,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 61331,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 223,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 224,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 64336,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 224,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 225,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 50795,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 225,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 226,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 63312,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 226,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 227,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 58153,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 227,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 228,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 59729,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 228,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 229,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62127,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 229,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 230,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 52238,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 230,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 231,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 57592,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 231,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 232,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 53262,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 232,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 233,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 59648,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 233,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 234,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 49322,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 234,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 235,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 61103,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 235,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 236,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 65307,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 236,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 237,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54681,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 237,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 238,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 59773,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 238,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 239,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 59652,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 239,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 240,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62682,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 240,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 241,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 50370,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 241,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 242,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62727,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 242,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 243,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 50883,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 243,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 244,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 52769,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 244,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 245,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 62820,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 245,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 246,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 54664,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 246,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 247,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 53030,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 247,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 248,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56413,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 248,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 249,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 60985,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 249,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 250,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 62624,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 250,
+                "verdict": "ATTACK (rule)",
+                "attack_type": "Botnet (suspected beaconing)",
+                "ml_attack_probability": 0.11,
+                "classification": null,
+                "rule_attack": "Botnet (suspected beaconing)",
+                "flow_metadata": {
+                    "Flow ID": 251,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 59061,
+                    "Destination IP": "10.42.20.40",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 251,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 252,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 58886,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 252,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.03,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 253,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 58703,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 443
+                }
+            },
+            {
+                "flow_index": 253,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 254,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 56291,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 254,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.01,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 255,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 51426,
+                    "Destination IP": "10.42.20.123",
+                    "Destination Port": 123
+                }
+            },
+            {
+                "flow_index": 255,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 256,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 55669,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 256,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.04,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 257,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 58727,
+                    "Destination IP": "10.42.20.53",
+                    "Destination Port": 53
+                }
+            },
+            {
+                "flow_index": 257,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.01,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 258,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 56984,
+                    "Destination IP": "10.42.20.123",
+                    "Destination Port": 123
+                }
+            },
+            {
+                "flow_index": 258,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 259,
+                    "Source IP": "10.42.10.22",
+                    "Source Port": 49532,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            },
+            {
+                "flow_index": 259,
+                "verdict": "BENIGN",
+                "attack_type": null,
+                "ml_attack_probability": 0.1,
+                "classification": null,
+                "rule_attack": null,
+                "flow_metadata": {
+                    "Flow ID": 260,
+                    "Source IP": "10.42.10.21",
+                    "Source Port": 50222,
+                    "Destination IP": "198.18.42.52",
+                    "Destination Port": 80
+                }
+            }
+        ],
+        "flow_reports_truncated": false
+    }
+}

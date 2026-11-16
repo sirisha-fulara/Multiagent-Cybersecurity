@@ -6,11 +6,8 @@ from rag.rag_pipeline import (
     create_vector_database,
     search,
 )
-
-
 class ThreatIntelligenceAgent:
     """Retrieve cybersecurity knowledge and generate a threat report."""
-
     def __init__(self):
         print("Initializing Threat Intelligence Agent...")
 
@@ -59,53 +56,44 @@ class ThreatIntelligenceAgent:
             top_k=3,
         )
 
-        # handle cases where no knowledge was retrieved.
         if not documents:
             return {
                 "agent": "Threat Intelligence Agent",
                 "attack_type": attack_type,
                 "retrieved_context": [],
-                "analysis": (
-                    "No relevant information was retrieved. "
-                    "The attack prediction could not be "
-                    "independently verified."
-                ),
+                "analysis": "No relevant knowledge was retrieved.",
                 "status": "completed",
                 "evidence_available": False,
             }
 
-        # preparing retreived knowledge
-        context = "\n\n".join(str(document) for document in documents)
+        # Keep only the actual retrieved text.
+        retrieved_context = [item["text"] for item in documents]
+        context = "\n\n".join(retrieved_context)
         prompt = f"""You are a cybersecurity threat intelligence agent.
+        Predicted attack: {attack_type}
 
-Predicted attack: {attack_type}
+        Relevant retrieved evidence:
+            {context}
 
-Retrieved knowledge:
-{context}
+        Write a concise defensive threat intelligence report.
 
-Write a concise report with these sections:
+        Include:
+        1. Attack overview
+        2. Relevant indicators
+        3. Potential impact
+        4. Defensive recommendations
+        5. Information gaps
 
-1. Attack overview
-2. Indicators supported by the retrieved knowledge
-3. Potential impact
-4. Defensive recommendations
-5. Information gaps
+        Use only the supplied evidence.
+        Do not claim that a predicted attack is confirmed.
+        Avoid repeating the retrieved evidence verbatim.
 
-Rules:
-- Use only facts supported by the retrieved knowledge.
-- Do not invent indicators, impacts, or mitigations.
-- If information is missing, state that it is not specified
-  in the retrieved knowledge.
-- Distinguish a model prediction from a confirmed attack.
-- Keep the report clear and concise.
+        Threat intelligence report:
+        """
 
-Threat intelligence report:
-"""
-
-        # generate the report.
         response = self.generator(
             prompt,
-            max_new_tokens=140,
+            max_new_tokens=220,
             do_sample=False,
             return_full_text=False,
             repetition_penalty=1.2,
@@ -115,11 +103,10 @@ Threat intelligence report:
 
         analysis = response[0]["generated_text"].strip()
 
-        # return a structured result to the coordinator.
         return {
             "agent": "Threat Intelligence Agent",
             "attack_type": attack_type,
-            "retrieved_context": documents,
+            "retrieved_context": retrieved_context,
             "analysis": analysis,
             "status": "completed",
             "evidence_available": True,
